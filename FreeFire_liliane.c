@@ -22,8 +22,8 @@ typedef struct No {
 void inicializarEstatica(Item mochila[], int *contador);
 void inserirEstatica(Item mochila[], int *contador); 
 void removerEstatica(Item mochila[], int *contador);
-void listarEstatica(Item mochila[], int *contador);
-void buscarEstatica(Item mochila[], int *contador);
+void listarEstatica(Item mochila[], int contador);
+void buscarEstatica(Item mochila[], int contador);
 
 //FUNÇÕES LISTA ENCADEADA
  No* inicializarEncadeada();
