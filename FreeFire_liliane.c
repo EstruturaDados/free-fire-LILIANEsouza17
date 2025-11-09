@@ -156,7 +156,7 @@ void removerEstatica(Item mochila[], int *contador) {
 
  }
 
- void buscarEstatica(Item mochila[], int contador) {
+ void buscarEstatica(Item mochila[], int *contador) {
       if (contador == 0) {
         printf("A MOCHILA ESTÁ VAZIA!\n");
         return;
