@@ -110,33 +110,54 @@ printf("========================================================================
     printf("ITEM INSERIDO COM SUCESSO!\n");
     listarEstatica(mochila, *contador);
 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+     if (*contador == 0)
+     {
+         printf("A MOCHILA ESTÁ VAZIA!\n");
+         return;
+     }
+     char nome[30];
+     printf("DIGITE O NOME O ITEM A REMOVER: ");
+     fgets(nome, 30, stdin);
+     nome[strcspn(nome, "\n")] = 0;
+
+     int encontrado = 0;
+     for (int i = 0; i < *contador; i++)
+     {
+         if (strcmp(mochila[i].nome, nome) == 0)
+         {
+             for (int j = i; j < *contador - 1; j++)
+             {
+                 mochila[j] = mochila[j + 1];
+             }
+             (*contador)--;
+             encontrado = 1;
+             printf("ITEM REMOVIDO COM SUCESSO!\n");
+             break;
+         }
+     }
+     if (!encontrado)
+         printf("ITEM NÃO ENCONTRADO!\n");
+     listarEstatica(mochila, *contador);
  }
- void removeEstatica(Item mochila[], int *contador) {
-    if (*contador == 0){
-        printf("A MOCHILA ESTÁ VAZIA!\n");
-        return;
-    }
-    char nome[30];
-    printf("DIGITE O NOME O ITEM A REMOVER: ");
-    fgets(nome, 30, stdin);
-    nome[strcspn(nome, "\n")] = 0;
 
-    int encontrado = 0;
-    for (int i = 0; i < *contador; i++) {
-        if(strcmp(mochila[i].nome, nome) == 0) {
-            for (int j = i; j < *contador - 1; j++) {
-                mochila[j] = mochila[j + 1];
-            }
-            (*contador)--;
-            encontrado = 1;
-            printf("ITEM REMOVIDO COM SUCESSO!\n");
-            break;
-        }
-    }
-    if (!encontrado)
-        printf("ITEM NÃO ENCONTRADO!\n");
-    listarEstatica(mochila, *contador);
+ void inserirEstatica(Item mochila[], int *contador)
+ {
+ }
 
+ void removerEstatica(Item mochila[], int *contador)
+ {
+ }
+
+ void listarEstatica(Item mochila[], int *contador)
+ {
  }
 
  void listarEstatica(Item mochila[], int contador) {
@@ -176,7 +197,12 @@ printf("========================================================================
 
     //LISTA ENCADEADA
 
-    No inicializarEncadeada() {
+    void buscarEstatica(Item mochila[], int *contador)
+    {
+    }
+
+    No inicializarEncadeada()
+    {
         return NULL; // lista começa vazia
     }
     No* inserirEncadeada(No *inicio) {
