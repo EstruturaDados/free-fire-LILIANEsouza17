@@ -180,10 +180,7 @@ void removerEstatica(Item mochila[], int *contador) {
 
     //LISTA ENCADEADA
 
-    void buscarEstatica(Item mochila[], int *contador)
-    {
-    }
-
+    
     No* inicializarEncadeada()
     {
         return NULL; // lista começa vazia
