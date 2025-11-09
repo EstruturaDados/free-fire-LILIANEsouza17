@@ -110,38 +110,61 @@ printf("========================================================================
     printf("ITEM INSERIDO COM SUCESSO!\n");
     listarEstatica(mochila, *contador);
 }
-void removerEstatica(Item mochila[], int *contador) {
+void inserirEstatica(Item mochila[], int *contador){
+    if(*contador>=MAX_ITENS) {
+        printf("A MOCHILA ESTÁ CHEIA!\n");
+        return;
+    }
+    printf("DIGITE O NOME DO ITEM: ");
+    fgets(mochila[*contador].nome, 30, stdin);
+    mochila[*contador].nome[strcspn(mochila[*contador].nome, "\n")] = 0;
 
-   if (*contador == 0) {
-     
-         printf("A MOCHILA ESTÁ VAZIA!\n");
-         return;
-     }
-     char nome[30];
-     printf("DIGITE O NOME O ITEM A REMOVER: ");
-     fgets(nome, 30, stdin);
-     nome[strcspn(nome, "\n")] = 0;
 
-     int encontrado = 0;
-     for (int i = 0; i < *contador; i++)
-     {
-         if (strcmp(mochila[i].nome, nome) == 0)
-         {
-             for (int j = i; j < *contador - 1; j++)
-             {
-                 mochila[j] = mochila[j + 1];
-             }
-             (*contador)--;
-             encontrado = 1;
-             printf("ITEM REMOVIDO COM SUCESSO!\n");
-             break;
-         }
-     }
-     if (!encontrado)
-         printf("ITEM NÃO ENCONTRADO!\n");
-     listarEstatica(mochila, *contador);
- }
+    printf("DIGITE O TIPO DO ITEM:");
+    fgets(mochila[*contador].tipo, 20, stdin);
+    mochila[*contador].tipo[strcspn(mochila[*contador].tipo, "\n")] = 0;
+    printf("DIGITE A QUANTIDADE:");
+    scanf("%d", &mochila[*contador].quantidade);
+    getchar();
 
+    (*contador)++;
+    printf("ITEM INSERIDO COM SUCESSO!");
+    listarEstatica(mochila, *contador);
+}
+
+void removerEstatica(Item mochila[], int *contador)
+{
+
+    if (*contador == 0)
+    {
+
+        printf("A MOCHILA ESTÁ VAZIA!\n");
+        return;
+    }
+    char nome[30];
+    printf("DIGITE O NOME O ITEM A REMOVER: ");
+    fgets(nome, 30, stdin);
+    nome[strcspn(nome, "\n")] = 0;
+
+    int encontrado = 0;
+    for (int i = 0; i < *contador; i++)
+    {
+        if (strcmp(mochila[i].nome, nome) == 0)
+        {
+            for (int j = i; j < *contador - 1; j++)
+            {
+                mochila[j] = mochila[j + 1];
+            }
+            (*contador)--;
+            encontrado = 1;
+            printf("ITEM REMOVIDO COM SUCESSO!\n");
+            break;
+        }
+    }
+    if (!encontrado)
+        printf("ITEM NÃO ENCONTRADO!\n");
+    listarEstatica(mochila, *contador);
+}
 
  void listarEstatica(Item mochila[], int contador) {
     if (contador == 0) {
