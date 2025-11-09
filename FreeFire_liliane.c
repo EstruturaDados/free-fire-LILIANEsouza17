@@ -184,7 +184,7 @@ void removerEstatica(Item mochila[], int *contador) {
     {
     }
 
-    No inicializarEncadeada()
+    No* inicializarEncadeada()
     {
         return NULL; // lista começa vazia
     }
