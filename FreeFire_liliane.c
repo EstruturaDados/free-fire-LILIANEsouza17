@@ -68,7 +68,7 @@ printf("========================================================================
             break;
             case 2: removerEstatica(mochila, &contador);
             break;
-            case 3: listarEstatica(mochila, &contador);
+            case 3: listarEstatica(mochila, contador);
             break;
             case 4: buscarEstatica(mochila, contador);
             break;
@@ -95,7 +95,7 @@ printf("========================================================================
     }
     printf("DIGITE O NOME DO ITEM: ");
     fgets(mochila[*contador]. nome, 30, stdin);
-    mochila[*contador]. nome[strcpn(mochila[*contador]. nome, "\n")] = 0;
+    mochila[*contador]. nome[strcspn(mochila[*contador]. nome, "\n")] = 0;
 
     printf("DIGITE O TIPO DO ITEM: ");
     fgets(mochila[*contador]. tipo, 20, stdin);
@@ -156,7 +156,7 @@ void removerEstatica(Item mochila[], int *contador) {
 
  }
 
- void buscarEstatica(Item mochila[], int *contador) {
+ void buscarEstatica(Item mochila[], int contador) {
       if (contador == 0) {
         printf("A MOCHILA ESTÁ VAZIA!\n");
         return;
