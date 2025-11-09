@@ -68,7 +68,7 @@ printf("========================================================================
             break;
             case 2: removerEstatica(mochila, &contador);
             break;
-            case 3: listarEstatica(mochila, contador);
+            case 3: listarEstatica(mochila, &contador);
             break;
             case 4: buscarEstatica(mochila, contador);
             break;
