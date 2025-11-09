@@ -109,17 +109,11 @@ printf("========================================================================
     (*contador)++;
     printf("ITEM INSERIDO COM SUCESSO!\n");
     listarEstatica(mochila, *contador);
+}
+void removerEstatica(Item mochila[], int *contador) {
 
- 
- 
- 
-
- 
- 
- 
- 
-     if (*contador == 0)
-     {
+   if (*contador == 0) {
+     
          printf("A MOCHILA ESTÁ VAZIA!\n");
          return;
      }
@@ -148,17 +142,6 @@ printf("========================================================================
      listarEstatica(mochila, *contador);
  }
 
- void inserirEstatica(Item mochila[], int *contador)
- {
- }
-
- void removerEstatica(Item mochila[], int *contador)
- {
- }
-
- void listarEstatica(Item mochila[], int *contador)
- {
- }
 
  void listarEstatica(Item mochila[], int contador) {
     if (contador == 0) {
