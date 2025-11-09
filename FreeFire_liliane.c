@@ -59,9 +59,13 @@ printf("========================================================================
          printf(" [0] Sair do sistema\n");
 
 printf("===================================================================================================\n");
+         printf("ITENS ATUAIS: %d/%d\n", contador, MAX_ITENS);
          printf(" Escolha uma opcao: ");
-         scanf("%d", &opcao);
-         getchar(); 
+         if (scanf("%d", &opcao) != 1) {
+            opcao =-1;
+            while (getchar() != '\n');
+
+        }else getchar(); 
 
          switch (opcao) {
             case 1: inserirEstatica(mochila, &contador);
@@ -89,7 +93,9 @@ printf("========================================================================
  //LISTA ESTÁTICA
 
  void inicializarEstatica(Item mochila[], int *contador) {
-    if (*contador >= MAX_ITENS) {
+    void(mochila);
+    *contador = 0;
+
         printf("A MOCHILA ESTÁ CHEIA!\n");
         return;
     }
@@ -116,19 +122,22 @@ void inserirEstatica(Item mochila[], int *contador){
         return;
     }
     printf("DIGITE O NOME DO ITEM: ");
-    fgets(mochila[*contador].nome, 30, stdin);
+    fgets(mochila[*contador].nome, sizeof(mochila[*contador].nome), stdin);
     mochila[*contador].nome[strcspn(mochila[*contador].nome, "\n")] = 0;
 
 
     printf("DIGITE O TIPO DO ITEM:");
-    fgets(mochila[*contador].tipo, 20, stdin);
+    fgets(mochila[*contador].tipo, sizeof(mochila[*contador].tipo), stdin);
     mochila[*contador].tipo[strcspn(mochila[*contador].tipo, "\n")] = 0;
     printf("DIGITE A QUANTIDADE:");
-    scanf("%d", &mochila[*contador].quantidade);
+    while (scanf("%d", &mochila[*contador].quantidade) != 1){
+        printf("ENTRADA INVÁLIDA. DIGITE UM NÚMERO: ");
+        while(getchar() != '\n');
+    }
     getchar();
 
     (*contador)++;
-    printf("ITEM INSERIDO COM SUCESSO!");
+    printf("\n ITEM INSERIDO COM SUCESSO! (%d/%d)\n", *contador, MAX_ITENS);
     listarEstatica(mochila, *contador);
 }
 
@@ -143,7 +152,7 @@ void removerEstatica(Item mochila[], int *contador)
     }
     char nome[30];
     printf("DIGITE O NOME O ITEM A REMOVER: ");
-    fgets(nome, 30, stdin);
+    fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = 0;
 
     int encontrado = 0;
@@ -157,7 +166,7 @@ void removerEstatica(Item mochila[], int *contador)
             }
             (*contador)--;
             encontrado = 1;
-            printf("ITEM REMOVIDO COM SUCESSO!\n");
+            printf("ITEM REMOVIDO COM SUCESSO! (%d/%d)\n", *contador, MAX_ITENS);
             break;
         }
     }
@@ -167,14 +176,17 @@ void removerEstatica(Item mochila[], int *contador)
 }
 
  void listarEstatica(Item mochila[], int contador) {
+    printf("\n--- ITENS NA MOCHILA(estatica)---\n");
+    printf("CAPACIDADE USADA: %d/%d\n", contador, MAX_ITENS);
+    PRINTF("---------------------------------------------------------------------------------------\n");
+
     if (contador == 0) {
         printf("A MOCHILA ESTÁ VAZIA!\n");
         return;
     }
-
-    printf("\n---ITENS NA MOCHILA(estatica)---\n");
+    
     for (int i = 0; i < contador; i++) {
-        printf("NOME: %s | TIPO: %s | QUANTIDADE: %d\n", mochila[i]. nome, mochila[i]. tipo, mochila[i].quantidade);
+        printf(" %d) NOME: %s | TIPO: %s | QUANTIDADE: %d\n", i + 1, mochila[i]. nome, mochila[i]. tipo, mochila[i].quantidade);
     }
 
  }
@@ -186,8 +198,9 @@ void removerEstatica(Item mochila[], int *contador)
       }
       char nome[30];
       printf("DIGITE O NOME DO ITEM A BUSCAR: ");
-      fgets(nome, 30, stdin);
+      fgets(nome, sizeof(nome), stdin);
       nome[strcspn(nome, "\n")] = 0;
+
       int encontrado = 0;
       for (int i = 0; i < contador; i++) {
         if (strcmp(mochila[i]. nome, nome) == 0) {
@@ -216,17 +229,21 @@ void removerEstatica(Item mochila[], int *contador)
         }
 
         printf("DIGITE O NOME DO ITEM: ");
-        fgets(novo->item.nome, 30, stdin);
+        fgets(novo->item.nome, sizeof(novo->item.nome), stdin);
         novo->item.nome[strcspn(novo->item.nome, "\n")] = 0;
 
         printf("DIGITE O TIPO DO ITEM: ");
-        fgets(novo->item.tipo, 20, stdin);
+        fgets(novo->item.tipo, sizeof(novo->item.tipo), stdin);
         novo->item.tipo[strcspn(novo->item.tipo, "\n")] = 0;
 
         printf("DIGITE A QUANTIDADE: ");
-        scanf("%d", &novo->item.quantidade);
-        getchar();
+        while(scanf("%d" &novo->item.quantidade) != 1) {
+            printf("ENTRADA INVÁLIDA. DIGITE UM NÚMERO: ");
+            while(getchar() != '\n');
 
+        }
+       getchar();
+    
         novo->proximo = inicio;
         inicio = novo;
 
@@ -241,9 +258,12 @@ void removerEstatica(Item mochila[], int *contador)
 
         printf("\n---ITENS DA LISTA ENCADEADA---\n");
         No *atual = inicio;
+        int i = 1;
+
         while (atual != NULL) {
             printf("NOME: %s | TIPO: %s | QUANTIDADE: %d\n", atual->item.nome, atual->item.tipo, atual->item.quantidade);
             atual = atual->proximo;
+            i++;
 
         }
 
